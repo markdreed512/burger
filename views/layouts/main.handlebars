@@ -92,6 +92,14 @@
 		.devourBtn:hover{
 			color: red;
 		}
+		span{
+			font-size: 15px;
+			position: relative;
+			right: 0px;
+		}
+		.checked {
+  color: orange;
+}
 		
 	</style>
 </head>
@@ -143,6 +151,16 @@
 			
 
 
+		});
+		var stars = 0;
+		$(".fa-star").on("click", function(){
+			$(this).toggleClass('checked');
+			if($(this).attr("class")==='checked'){
+				stars++;
+			}else{
+				stars--;
+			}
+			updateStars();
 		})
 	</script>
 </body>
