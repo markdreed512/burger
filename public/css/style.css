@@ -1,0 +1,23 @@
+
+		body {
+			font-family: arial;
+		}
+
+		h1 {
+			font-size:40px;
+		}
+
+		button {
+			position: absolute;
+			left: 450px;
+			background-color: salmon;
+			color: olivedrab;
+			padding: 10px;
+		}
+
+		li {
+			font-size: 25px;
+			list-style-type: none;
+
+		}
+	

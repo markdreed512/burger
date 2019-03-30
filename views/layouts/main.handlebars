@@ -1,13 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-		<title>Burger Logger</title>
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="/assets/js/burgers.js"></script>
-	</head>
-	<body>
-		{{{ body }}}
-	</body>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Fascinate+Inline|Spicy+Rice" rel="stylesheet">
+
+	{{!-- <link rel="stylesheet" href="../assets/css/style.css" type="text/css" /> --}}
+	<title>Burger Logger</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	{{!-- <script src="assets/javascript/burgers.js"></script> --}}
+	<style>
+		body {
+			font-family: arial;
+			background-color: rgb(111, 121, 21);
+		}
+
+		h1 {
+			font-size: 80px;
+			text-align: center;
+			margin: 100px auto 100px auto;
+			{{!-- font-family: 'Bowlby One SC', cursive; --}}
+			font-family: 'Fascinate Inline', cursive;
+			{{!-- font-family: 'Spicy Rice', cursive; --}}
+
+		}
+
+		.devourBtn {
+
+			background-color: #F6906C;
+			color: rgb(0, 0, 0);
+			padding: 10px;
+			height: 80%;
+			font-size: 20px;
+		}
+		#submit-form{
+			margin-top:130px;
+		}
+		#submit-form input , button{
+			height: 50px;
+		}
+		#top-container{
+			margin-bottom: 0;
+		}		
+		#top-left{
+			float: left;
+		}
+		#top-right{
+			float: right;
+		}
+		#container-main{
+			margin-top: 0;
+		}
+
+		th {
+			font-size: 30px;
+		}
+
+		#eaten {
+
+			color: pink;
+			float: right;
+		}
+
+		#uneaten {
+			color: rgb(227, 248, 34);
+			float: left;
+		}
+
+		td {
+			font-size: 30px;
+		}
+
+		form {
+			clear: both;
+			text-align: center;
+		}
+		#para{
+			position: relative;
+			top: -100px;
+
+			clear:both;
+			margin-left:0;
+			padding-left: 0;
+			font-size: 26.5px;
+		}
+		.devourBtn{border: none;}
+		.devourBtn:hover{
+			color: red;
+		}
+		
+	</style>
+</head>
+
+<body>
+	{{{ body }}}
+
+
+	
+
+
+	<script>
+		$("#submitBtn").on('click', function (event) {
+			event.preventDefault();
+			//capture value in input field
+			var userInput = {
+				name: $('#userInput').val().trim()
+			}
+			//send to controller
+			$.ajax("/api/burger", {
+				type: "POST",
+				data: userInput
+			}).then(
+				function () {
+
+					// Reload the page to get the updated list
+					location.reload();
+				}
+			);
+		});
+
+		$(".devourBtn").on('click', function (event) {
+			var dataId = event.target.getAttribute("data-id");
+			console.log("data ID: ", dataId)
+			var data = {
+				name: dataId
+			}
+			$.ajax("/api/burger", {
+				type: "PUT",
+				data: data
+			})
+			//why won't this work? -- solved by putting the button in a form
+					{{!-- .then(
+						function () {
+							alert("then")
+							location.reload();
+						}
+					); --}}
+			
+
+
+		})
+	</script>
+</body>
+
 </html>
